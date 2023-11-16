@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Résultats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Résultats</h1>
+
+    <h2>Nombre d'individus par genre :</h2>
+    <ul>
+        {% for gender, count in gender_counts %}
+        <li>{{ gender }} : {{ count }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Salaire moyen par titre de poste :</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Titre de poste</th>
+                <th>Salaire moyen annuel</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job_title, average_salary in average_salaries %}
+            <tr>
+                <td>{{ job_title }}</td>
+                <td>{{ average_salary | int }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Les 3 titres de poste les plus courants chez les séniors:</h2>
+    <ul>
+        {% for job_title, count in top_3_job_titles %}
+        <li>{{ job_title }} : {{ count }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Enregistrements avec 'Années d'expérience' supérieures à 10 :</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Age</th>
+                <th>Genre</th>
+                <th>Niveau d'études</th>
+                <th>Poste</th>
+                <th>Années d'expérience</th>
+                <th>Salaire</th>
+                <th>Pays</th>
+                <th>Race</th>
+                <th>Séniors</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in filtered_records %}
+            <tr>
+                {% for field in record %}
+                <td>{{ field }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
